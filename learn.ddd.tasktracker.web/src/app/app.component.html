@@ -1,0 +1,9 @@
+<mat-toolbar>
+	<span id="application">Application</span>
+	<button mat-button (click)="navigateTo(1)">issues</button>
+	<button mat-button (click)="navigateTo(2)">products</button>
+</mat-toolbar>
+<div class="container">
+	<app-issues *ngIf="this.navigationPage==1" />
+	<app-products *ngIf="this.navigationPage==2" />
+</div>
