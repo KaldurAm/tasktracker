@@ -8,10 +8,9 @@ public class Backlog : AggregateRoot
 	private readonly HashSet<Issue> _issues = new();
 
 	private Backlog(Guid id, Guid productId, string name) : base(id)
-		=> (ProductId, Name) = (productId, name);
-
-	public static Backlog Create(Guid id, Guid productId, string name)
-		=> new(id, productId, name);
+	{
+		(ProductId, Name) = (productId, name);
+	}
 
 	public Guid ProductId { get; init; }
 
@@ -22,9 +21,18 @@ public class Backlog : AggregateRoot
 	public virtual IEnumerable<Issue> Issues
 		=> _issues;
 
-	public void CreateIssue(Issue issue) 
-		=> RaiseDomainEvent(new CreateIssueDomainEvent(issue));
+	public static Backlog Create(Guid id, Guid productId, string name)
+	{
+		return new(id, productId, name);
+	}
 
-	public void AddIssue(Issue issue) 
-		=> _issues.Add(issue ?? throw new ArgumentNullException(nameof(issue)));
+	public void CreateIssue(Issue issue)
+	{
+		RaiseDomainEvent(new CreateIssueDomainEvent(issue));
+	}
+
+	public void AddIssue(Issue issue)
+	{
+		_issues.Add(issue ?? throw new ArgumentNullException(nameof(issue)));
+	}
 }

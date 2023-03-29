@@ -1,23 +1,11 @@
 using System.Net;
 using System.Reflection;
-using AutoMapper;
-using Learn.Ddd.TaskTracker.Api.Contracts.Requests;
-using Learn.Ddd.TaskTracker.Api.Contracts.Responses;
 using Learn.Ddd.TaskTracker.Api.Endpoints;
 using Learn.Ddd.TaskTracker.Api.Providers;
 using Learn.Ddd.TaskTracker.Application;
-using Learn.Ddd.TaskTracker.Application.Backlogs.Queries;
 using Learn.Ddd.TaskTracker.Application.Interfaces.Providers;
-using Learn.Ddd.TaskTracker.Application.Issues.Commands;
-using Learn.Ddd.TaskTracker.Application.Members.Commands;
-using Learn.Ddd.TaskTracker.Application.Members.Queries;
-using Learn.Ddd.TaskTracker.Application.Products.Commands;
-using Learn.Ddd.TaskTracker.Application.Products.Queries;
-using Learn.Ddd.TaskTracker.Application.Teams.Commands;
-using Learn.Ddd.TaskTracker.Application.Teams.Queries;
 using Learn.Ddd.TaskTracker.Infrastructure;
 using Learn.Ddd.TaskTracker.Infrastructure.Persistence.Initializers;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Serilog;
@@ -63,6 +51,7 @@ try
 	app.UseSerilogRequestLogging();
 	app.UseSwagger();
 	app.UseSwaggerUI();
+
 	app.Use(async (context, next) =>
 	{
 		try
@@ -72,7 +61,7 @@ try
 		catch(Exception ex)
 		{
 			Log.Logger.Error(ex, "Error occured while processing request");
-			
+
 			var problem = new ProblemDetails
 			{
 				Title = "Error occured while processing request",
@@ -84,18 +73,20 @@ try
 			context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 			await context.Response.WriteAsJsonAsync(problem);
 		}
-		
 	});
+
 	app.UseAuthentication();
 	app.UseAuthorization();
 	app.MapControllers();
 	app.UseCors("web");
 	await Seeder.StartAsync(app);
+
 	app.AddProductsEndpoints()
 		.AddBacklogsEndpoints()
 		.AddIssuesEndpoints()
 		.AddTeamsEndpoints()
 		.AddMembersEndpoints();
+
 	app.Run();
 }
 catch(Exception ex)

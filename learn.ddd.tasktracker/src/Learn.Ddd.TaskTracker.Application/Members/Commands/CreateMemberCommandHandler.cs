@@ -24,7 +24,7 @@ public record CreateMemberCommandHandler : IRequestHandler<CreateMemberCommand, 
 	public async Task<Result<Guid>> Handle(CreateMemberCommand request, CancellationToken cancellationToken)
 	{
 		var newMember = TeamMember.Create(request.FirstName, request.LastName, request.Email);
-		
+
 		_logger.LogInformation("New member generated {TeamMember}", newMember);
 
 		await _memberRepository.CreateTeamMemberAsync(newMember, cancellationToken);

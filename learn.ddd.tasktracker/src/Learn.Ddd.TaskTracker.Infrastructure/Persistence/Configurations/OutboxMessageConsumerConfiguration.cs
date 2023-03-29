@@ -10,11 +10,8 @@ public class OutboxMessageConsumerConfiguration : IEntityTypeConfiguration<Outbo
 	public void Configure(EntityTypeBuilder<OutboxMessageConsumer> builder)
 	{
 		builder.ToTable("OutboxMessageConsumers");
-		builder.HasKey(outboxMessageConsumer => 
-			new
-			{
-				outboxMessageConsumer.Id,
-				outboxMessageConsumer.Name,
-			});
+
+		builder.HasKey(outboxMessageConsumer =>
+			new { outboxMessageConsumer.Id, outboxMessageConsumer.Name, });
 	}
 }

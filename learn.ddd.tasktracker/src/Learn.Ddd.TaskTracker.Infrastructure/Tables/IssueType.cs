@@ -6,7 +6,9 @@ public class IssueType : BaseEntity<int>
 {
 	/// <inheritdoc />
 	public IssueType(int id, string title) : base(id)
-		=> Title = title;
-	
+	{
+		Title = title;
+	}
+
 	public string Title { get; init; }
 }

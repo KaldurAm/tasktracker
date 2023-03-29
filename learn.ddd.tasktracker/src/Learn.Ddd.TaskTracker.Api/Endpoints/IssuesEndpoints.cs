@@ -9,7 +9,7 @@ public static class IssuesEndpoints
 	{
 		app.MapGet("api/issues",
 			async (int pageNumber, int pageSize, ISender sender, IMapper mapper) => { });
-		
+
 		return app;
 	}
 }

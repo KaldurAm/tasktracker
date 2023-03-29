@@ -13,9 +13,6 @@ public class TeamMember : AuditableEntity
 		Email = email;
 	}
 
-	public static TeamMember Create(string firstName, string lastName, string email)
-		=> new(Guid.NewGuid(), default, firstName, lastName, email);
-
 	public Guid? TeamId { get; init; }
 	public string FirstName { get; init; } = string.Empty;
 	public string LastName { get; init; } = string.Empty;
@@ -24,4 +21,9 @@ public class TeamMember : AuditableEntity
 	public virtual Team? Team { get; init; }
 
 	public string Alias => LastName.ToLower() + "." + FirstName.ToLower().First();
+
+	public static TeamMember Create(string firstName, string lastName, string email)
+	{
+		return new(Guid.NewGuid(), default, firstName, lastName, email);
+	}
 }

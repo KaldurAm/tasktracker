@@ -4,5 +4,8 @@ namespace Learn.Ddd.TaskTracker.Api.Providers;
 
 public class DateTimeProvider : IDateTimeProvider
 {
-	public DateTime GetCurrentDateTime() => DateTime.UtcNow;
+	public DateTime GetCurrentDateTime()
+	{
+		return DateTime.UtcNow;
+	}
 }

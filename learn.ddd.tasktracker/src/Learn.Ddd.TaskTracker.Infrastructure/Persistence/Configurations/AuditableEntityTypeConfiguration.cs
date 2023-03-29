@@ -16,6 +16,6 @@ public abstract class AuditableEntityTypeConfiguration<TEntity> : IEntityTypeCon
 		builder.Property(p => p.ModifiedAt).IsRequired(false);
 		builder.Property(p => p.ModifiedBy).IsRequired(false);
 	}
-	
+
 	public abstract void ConfigureEntity(EntityTypeBuilder<TEntity> builder);
 }

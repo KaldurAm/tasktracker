@@ -66,7 +66,7 @@ public static class Seeder
 
 			await context.IssueTypes.AddRangeAsync(issueTypes);
 		}
-		
+
 		try
 		{
 			if (!issueStatesCreated || !issueTypesCreated || !issuePrioritiesCreated)

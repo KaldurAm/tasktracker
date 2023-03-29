@@ -17,12 +17,13 @@ public static class ServiceCollectionExtensions
 		services.AddDbContext<DataContext>(options =>
 		{
 			var connectionString = configuration.GetConnectionString("Postgres");
-			
-			options.UseNpgsql(connectionString, opt =>
-			{
-				opt.EnableRetryOnFailure(3);
-				opt.CommandTimeout(30);
-			});
+
+			options.UseNpgsql(connectionString,
+				opt =>
+				{
+					opt.EnableRetryOnFailure(3);
+					opt.CommandTimeout(30);
+				});
 
 			options.EnableDetailedErrors();
 			options.EnableSensitiveDataLogging();

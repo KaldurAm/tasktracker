@@ -1,6 +1,5 @@
 using KDS.Primitives.FluentResult;
 using Learn.Ddd.TaskTracker.Application.Interfaces.Persistence.Repositories;
-using Learn.Ddd.TaskTracker.Application.Products.Validators;
 using Learn.Ddd.TaskTracker.Domain.Entities.Products;
 using Learn.Ddd.TaskTracker.Domain.Errors;
 using MediatR;
@@ -29,6 +28,7 @@ public record GetProductsWithBacklogQueryHandler : IRequestHandler<GetProductsWi
 		if (productsList is null || !productsList.Any())
 		{
 			_logger.LogWarning("Not found products {Products}", productsList);
+
 			return Result.Failure<IEnumerable<Product>>(DomainError.Product.NotFoundProducts);
 		}
 

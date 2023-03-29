@@ -13,6 +13,6 @@ public abstract class BaseEntityConfiguration<TEntity, TKey> : IEntityTypeConfig
 	{
 		builder.HasKey(k => k.Id);
 	}
-	
+
 	public abstract void ConfigureEntity(EntityTypeBuilder<TEntity> builder);
 }

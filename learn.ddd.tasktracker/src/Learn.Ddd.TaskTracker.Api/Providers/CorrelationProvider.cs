@@ -5,7 +5,7 @@ namespace Learn.Ddd.TaskTracker.Api.Providers;
 public class CorrelationProvider : ICorrelationProvider
 {
 	private readonly IHttpContextAccessor _httpContextAccessor;
-	
+
 	public CorrelationProvider(IHttpContextAccessor httpContextAccessor)
 	{
 		_httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));

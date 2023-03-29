@@ -13,7 +13,9 @@ public record CreateBacklogDomainEventHandler : INotificationHandler<CreateBackl
 	private readonly IServiceProvider _serviceProvider;
 
 	public CreateBacklogDomainEventHandler(IServiceProvider serviceProvider)
-		=> _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+	{
+		_serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+	}
 
 	/// <inheritdoc />
 	public async Task Handle(CreateBacklogDomainEvent notification, CancellationToken cancellationToken)

@@ -32,12 +32,16 @@ public class Issue : AggregateRoot
 
 	public virtual Issue? LinkedIssue { get; init; }
 
-	public virtual IEnumerable<Issue> Issues 
+	public virtual IEnumerable<Issue> Issues
 		=> _childIssues;
 
 	public void AddChildIssue(Issue issue)
-		=> _childIssues.Add(issue);
+	{
+		_childIssues.Add(issue);
+	}
 
-	public void Commit(Guid issueId, Guid sprintId) 
-		=> RaiseDomainEvent(new CommitIssueDomainEvent(issueId, sprintId));
+	public void Commit(Guid issueId, Guid sprintId)
+	{
+		RaiseDomainEvent(new CommitIssueDomainEvent(issueId, sprintId));
+	}
 }

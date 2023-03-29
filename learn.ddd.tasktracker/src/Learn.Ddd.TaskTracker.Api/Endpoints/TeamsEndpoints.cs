@@ -23,10 +23,10 @@ public static class TeamsEndpoints
 						title : result.Error.Code,
 						detail : result.Error.Message,
 						statusCode : result.Error.Code.Equals("NOT_FOUND") ? 404 : 500);
-		
+
 				return Results.Ok(mapper.Map<TeamResponse>(result.Value));
 			});
-	
+
 		app.MapGet("api/teams/with-members",
 			async (Guid teamId, ISender sender, IMapper mapper) =>
 			{

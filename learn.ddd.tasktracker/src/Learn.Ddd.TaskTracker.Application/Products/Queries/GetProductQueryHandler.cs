@@ -10,8 +10,10 @@ public record GetProductQueryHandler : IRequestHandler<GetProductQuery, Result<P
 {
 	private readonly IProductRepository _productRepository;
 
-	public GetProductQueryHandler(IProductRepository productRepository) 
-		=> _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
+	public GetProductQueryHandler(IProductRepository productRepository)
+	{
+		_productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
+	}
 
 	/// <inheritdoc />
 	public async Task<Result<Product>> Handle(GetProductQuery request, CancellationToken cancellationToken)

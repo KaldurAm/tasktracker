@@ -2,7 +2,6 @@ using KDS.Primitives.FluentResult;
 using Learn.Ddd.TaskTracker.Application.Interfaces.Persistence.Repositories;
 using Learn.Ddd.TaskTracker.Application.Persistence;
 using Learn.Ddd.TaskTracker.Domain.Entities.Products;
-using Learn.Ddd.TaskTracker.Domain.Entities.Teams;
 using MediatR;
 using Microsoft.Extensions.Logging;
 

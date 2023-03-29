@@ -11,8 +11,10 @@ public record CreateTeamDomainEventHandler : INotificationHandler<CreateTeamDoma
 {
 	private readonly IServiceProvider _serviceProvider;
 
-	public CreateTeamDomainEventHandler(IServiceProvider serviceProvider) 
-		=> _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+	public CreateTeamDomainEventHandler(IServiceProvider serviceProvider)
+	{
+		_serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+	}
 
 	/// <inheritdoc />
 	public async Task Handle(CreateTeamDomainEvent notification, CancellationToken cancellationToken)

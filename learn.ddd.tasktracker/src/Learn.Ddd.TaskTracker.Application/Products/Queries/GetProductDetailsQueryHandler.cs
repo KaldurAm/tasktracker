@@ -26,10 +26,12 @@ public record GetProductDetailsQueryHandler : IRequestHandler<GetProductDetailsQ
 		if (product is null)
 		{
 			_logger.LogWarning("Product not found by id {ProductId}", request.ProductId);
+
 			return Result.Failure<Product>(DomainError.Product.NotFoundProduct);
 		}
-		
+
 		_logger.LogInformation("Product found by id {ProductId}", request.ProductId);
+
 		return Result.Success(product);
 	}
 }

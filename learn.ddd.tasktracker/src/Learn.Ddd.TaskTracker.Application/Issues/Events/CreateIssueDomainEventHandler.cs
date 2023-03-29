@@ -1,6 +1,5 @@
 using Learn.Ddd.TaskTracker.Application.Interfaces.Persistence;
 using Learn.Ddd.TaskTracker.Domain.DomainEvents;
-using Learn.Ddd.TaskTracker.Domain.Entities.Products;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,8 +11,10 @@ public record CreateIssueDomainEventHandler : INotificationHandler<CreateIssueDo
 {
 	private readonly IServiceProvider _serviceProvider;
 
-	public CreateIssueDomainEventHandler(IServiceProvider serviceProvider) 
-		=> _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+	public CreateIssueDomainEventHandler(IServiceProvider serviceProvider)
+	{
+		_serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+	}
 
 	/// <inheritdoc />
 	public async Task Handle(CreateIssueDomainEvent notification, CancellationToken cancellationToken)
@@ -21,7 +22,7 @@ public record CreateIssueDomainEventHandler : INotificationHandler<CreateIssueDo
 		await using var scope = _serviceProvider.CreateAsyncScope();
 
 		var context = scope.ServiceProvider.GetRequiredService<IDataContext>();
-		
+
 		var logger = scope.ServiceProvider.GetRequiredService<ILogger<CreateIssueDomainEventHandler>>();
 
 		var backlog = await context.Backlogs
@@ -35,7 +36,7 @@ public record CreateIssueDomainEventHandler : INotificationHandler<CreateIssueDo
 		}
 
 		await context.Issues.AddAsync(notification.Issue, cancellationToken);
-		
+
 		await context.SaveChangesAsync(cancellationToken);
 
 		logger.LogInformation("Issue {IssueTitle} added to backlog {BacklogName}", notification.Issue.Title, backlog.Name);

@@ -16,21 +16,21 @@ public static class MembersEndpoints
 			async ([FromBody] CreateMemberRequest request, ISender sender) =>
 			{
 				var result = await sender.Send(new CreateMemberCommand(request.FirstName, request.LastName, request.Email));
-    
+
 				if (result.IsFailed)
 					return Results.Problem(
 						title : result.Error.Code,
 						detail : result.Error.Message,
 						statusCode : result.Error.Code.Equals("NOT_FOUND") ? 404 : 500);
-    
+
 				return Results.Ok(result.Value);
 			});
-	
+
 		app.MapGet("api/members/{memberId}",
 			async (Guid memberId, ISender sender, IMapper mapper) =>
 			{
 				var result = await sender.Send(new GetMemberByIdQuery(memberId));
-			
+
 				if (result.IsFailed)
 					return Results.Problem(
 						title : result.Error.Code,

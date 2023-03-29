@@ -13,10 +13,10 @@ public class ProductsProfile : Profile
 		CreateMap<Product, ProductWithBacklogResponse>();
 		CreateMap<Product, ProductWithTeamAndBacklogResponse>();
 		CreateMap<Product, ProductWithDetails>();
-		
+
 		CreateMap<Backlog, BacklogResponse>();
 		CreateMap<Backlog, BacklogWithIssuesResponse>();
-		
+
 		CreateMap<Issue, IssueResponse>();
 	}
 }

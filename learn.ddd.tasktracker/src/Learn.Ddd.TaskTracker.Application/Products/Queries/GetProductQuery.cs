@@ -6,7 +6,10 @@ namespace Learn.Ddd.TaskTracker.Application.Products.Queries;
 
 public class GetProductQuery : IRequest<Result<Product>>
 {
-	public GetProductQuery(Guid id) => Id = id;
+	public GetProductQuery(Guid id)
+	{
+		Id = id;
+	}
 
 	public Guid Id { get; }
 }

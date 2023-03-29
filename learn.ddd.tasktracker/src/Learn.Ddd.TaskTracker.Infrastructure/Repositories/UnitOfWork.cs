@@ -1,8 +1,8 @@
 using Learn.Ddd.TaskTracker.Application.Interfaces.Providers;
 using Learn.Ddd.TaskTracker.Application.Persistence;
 using Learn.Ddd.TaskTracker.Domain.Primitives;
-using Learn.Ddd.TaskTracker.Infrastructure.Tables;
 using Learn.Ddd.TaskTracker.Infrastructure.Persistence;
+using Learn.Ddd.TaskTracker.Infrastructure.Tables;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
@@ -24,12 +24,12 @@ public class UnitOfWork : IUnitOfWork
 	public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
 	{
 		ConvertDomainEventsToOutboxMessages();
-		
+
 		BeforeSaveChanges();
-		
+
 		await _context.SaveChangesAsync(cancellationToken);
 	}
-	
+
 	private void ConvertDomainEventsToOutboxMessages()
 	{
 		var outboxMessages = _context.ChangeTracker
@@ -56,7 +56,7 @@ public class UnitOfWork : IUnitOfWork
 
 		_context.Set<OutboxMessage>().AddRange(outboxMessages);
 	}
-	
+
 	private void BeforeSaveChanges()
 	{
 		var entries = _context.ChangeTracker

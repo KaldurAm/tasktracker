@@ -1,6 +1,6 @@
 using Learn.Ddd.TaskTracker.Domain.Errors.DomainEvents;
-using Learn.Ddd.TaskTracker.Infrastructure.Tables;
 using Learn.Ddd.TaskTracker.Infrastructure.Persistence;
+using Learn.Ddd.TaskTracker.Infrastructure.Tables;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,8 +15,10 @@ public class ProcessDomainEvent : BackgroundService
 	private readonly IServiceProvider _serviceProvider;
 
 	/// <inheritdoc />
-	public ProcessDomainEvent(IServiceProvider serviceProvider) 
-		=> _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+	public ProcessDomainEvent(IServiceProvider serviceProvider)
+	{
+		_serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+	}
 
 	/// <inheritdoc />
 	protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -24,9 +26,9 @@ public class ProcessDomainEvent : BackgroundService
 		while (!stoppingToken.IsCancellationRequested)
 		{
 			using var scope = _serviceProvider.CreateScope();
-			
+
 			var context = scope.ServiceProvider.GetRequiredService<DataContext>();
-			
+
 			var publisher = scope.ServiceProvider.GetRequiredService<IPublisher>();
 
 			var logger = scope.ServiceProvider.GetRequiredService<ILogger<ProcessDomainEvent>>();
@@ -42,20 +44,20 @@ public class ProcessDomainEvent : BackgroundService
 					.DeserializeObject<IDomainEvent>(
 						message.Content,
 						new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All, });
-				
+
 				if (domainEvent is null)
 					continue;
-				
+
 				try
 				{
 					await publisher.Publish(domainEvent, stoppingToken);
-					
+
 					message.ProcessedOnUtc = DateTime.UtcNow;
 				}
 				catch(Exception ex)
 				{
 					logger.LogError(ex, "Error occured while handling notification");
-					
+
 					continue;
 				}
 			}

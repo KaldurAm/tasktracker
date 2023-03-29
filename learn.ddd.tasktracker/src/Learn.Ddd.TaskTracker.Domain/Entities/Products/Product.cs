@@ -14,24 +14,32 @@ public class Product : AggregateRoot
 		Description = description ?? string.Empty;
 	}
 
-	public static Product Create(Guid id, string name, string? description = default)
-		=> new(id, name, description ?? string.Empty);
-	
 	public string Name { get; init; }
 	public string Description { get; init; }
 
 	public virtual Team? Team { get; init; }
 	public virtual Backlog? Backlog { get; init; }
 
-	public virtual ICollection<Sprint> Sprints 
+	public virtual ICollection<Sprint> Sprints
 		=> _sprints;
 
-	public void AddTeam() 
-		=> RaiseDomainEvent(new CreateTeamDomainEvent(Id));
+	public static Product Create(Guid id, string name, string? description = default)
+	{
+		return new(id, name, description ?? string.Empty);
+	}
 
-	public void AddBacklog() 
-		=> RaiseDomainEvent(new CreateBacklogDomainEvent(Id));
+	public void AddTeam()
+	{
+		RaiseDomainEvent(new CreateTeamDomainEvent(Id));
+	}
 
-	public void AddSprint(Sprint sprint) 
-		=> RaiseDomainEvent(new CreateSprintDomainEvent(sprint.ProductId, sprint.Title, sprint.Goal, sprint.Start, sprint.Finish));
+	public void AddBacklog()
+	{
+		RaiseDomainEvent(new CreateBacklogDomainEvent(Id));
+	}
+
+	public void AddSprint(Sprint sprint)
+	{
+		RaiseDomainEvent(new CreateSprintDomainEvent(sprint.ProductId, sprint.Title, sprint.Goal, sprint.Start, sprint.Finish));
+	}
 }
