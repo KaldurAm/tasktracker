@@ -15,17 +15,11 @@ public abstract class AggregateRoot : AuditableEntity
 	}
 
 	public IReadOnlyCollection<IDomainEvent> GetDomainEvents()
-	{
-		return _domainEvents.ToList();
-	}
+		=> _domainEvents.ToList();
 
 	public void ClearDomainEvents()
-	{
-		_domainEvents.Clear();
-	}
+		=> _domainEvents.Clear();
 
 	protected void RaiseDomainEvent(IDomainEvent @event)
-	{
-		_domainEvents.Add(@event);
-	}
+		=> _domainEvents.Add(@event);
 }

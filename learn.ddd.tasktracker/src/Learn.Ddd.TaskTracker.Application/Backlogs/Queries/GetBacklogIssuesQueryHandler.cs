@@ -27,7 +27,14 @@ public record GetBacklogIssuesQueryHandler : IRequestHandler<GetBacklogIssuesQue
 		{
 			_logger.LogWarning("Backlog not found by id {BacklogId}", request.BacklogId);
 
-			return Result.Failure<IEnumerable<Issue>>(DomainError.Product.NotFoundBacklog);
+			return Result.Failure<IEnumerable<Issue>>(DomainError.Product.NotFoundProduct);
+		}
+
+		if (!backlog.Issues.Any())
+		{
+			_logger.LogWarning("There are not found issues in product backlog");
+
+			return Result.Failure<IEnumerable<Issue>>(DomainError.Product.NotFoundIssues);
 		}
 
 		return Result.Success(backlog.Issues);

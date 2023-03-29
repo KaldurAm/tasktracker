@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learn.Ddd.TaskTracker.Infra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learn.Ddd.TaskTracker.Api", "src\Learn.Ddd.TaskTracker.Api\Learn.Ddd.TaskTracker.Api.csproj", "{3128EE07-CD38-497E-B9B1-BC7F236E91BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learn.Ddd.TaskTracker.UnitTests", "tests\Learn.Ddd.TaskTracker.UnitTests\Learn.Ddd.TaskTracker.UnitTests.csproj", "{3BBE909B-1D0D-4E35-B325-3F54EEB66A1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{3128EE07-CD38-497E-B9B1-BC7F236E91BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3128EE07-CD38-497E-B9B1-BC7F236E91BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3128EE07-CD38-497E-B9B1-BC7F236E91BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BBE909B-1D0D-4E35-B325-3F54EEB66A1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BBE909B-1D0D-4E35-B325-3F54EEB66A1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BBE909B-1D0D-4E35-B325-3F54EEB66A1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BBE909B-1D0D-4E35-B325-3F54EEB66A1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{13255EF2-4387-4C7C-82DC-003FEC9C16FF} = {B9CFE0CF-9029-4D0D-8BFD-3B62BAD6D086}

@@ -24,22 +24,14 @@ public class Product : AggregateRoot
 		=> _sprints;
 
 	public static Product Create(Guid id, string name, string? description = default)
-	{
-		return new(id, name, description ?? string.Empty);
-	}
+		=> new(id, name, description ?? string.Empty);
 
 	public void AddTeam()
-	{
-		RaiseDomainEvent(new CreateTeamDomainEvent(Id));
-	}
+		=> RaiseDomainEvent(new CreateTeamDomainEvent(Id));
 
 	public void AddBacklog()
-	{
-		RaiseDomainEvent(new CreateBacklogDomainEvent(Id));
-	}
+		=> RaiseDomainEvent(new CreateBacklogDomainEvent(Id));
 
 	public void AddSprint(Sprint sprint)
-	{
-		RaiseDomainEvent(new CreateSprintDomainEvent(sprint.ProductId, sprint.Title, sprint.Goal, sprint.Start, sprint.Finish));
-	}
+		=> RaiseDomainEvent(new CreateSprintDomainEvent(sprint.ProductId, sprint.Title, sprint.Goal, sprint.Start, sprint.Finish));
 }

@@ -1,6 +1,7 @@
 using AutoMapper;
 using Learn.Ddd.TaskTracker.Api.Contracts.Requests;
 using Learn.Ddd.TaskTracker.Api.Contracts.Responses;
+using Learn.Ddd.TaskTracker.Application.Backlogs.Queries;
 using Learn.Ddd.TaskTracker.Application.Issues.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

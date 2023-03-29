@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Learn.Ddd.TaskTracker.Application.Issues.Queries;
 
-public record GetIssueByIdQuery(Guid BacklogId, Guid IssueId, int Skip = 0, int Take = 10) : IRequest<Result<Issue>>;
+public record GetIssueByIdQuery(Guid IssueId, int pageNumber = 1, int PageSize = 10) : IRequest<Result<Issue>>;
